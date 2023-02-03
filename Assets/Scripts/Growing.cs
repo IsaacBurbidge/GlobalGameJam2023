@@ -10,10 +10,12 @@ public class Growing : MonoBehaviour
 		Player.GetComponent<Growing>().inputActions = inputActions;
 	}
 
-	private void OnCollisionStay2D(Collision2D collision) {
-		if (collision.collider.tag == "CanGrow") {
+	private void OnTriggerStay2D(Collider2D collision) {
+		if (collision.tag == "CanGrow") {
 			if (inputActions.PlayerControls.Root.IsPressed()) {
 				PlayerController.CanMove = false;
+			} if (inputActions.PlayerControls.UnRoot.IsPressed()) {
+				PlayerController.CanMove = true;
 			}
 		}
 	}

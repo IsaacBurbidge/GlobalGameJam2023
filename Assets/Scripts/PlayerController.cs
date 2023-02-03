@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public int PlayerSpeed = 5;
     private Player inputActions;
     public static bool CanMove = true;
+    public Vector3 GrowScale;
     private void Start() {
         GetComponent<PlayerController>().inputActions = new Player();
         GetComponent<PlayerController>().inputActions.Enable();
@@ -39,6 +40,9 @@ public class PlayerController : MonoBehaviour
         transform.position += new Vector3(-PlayerSpeed*Time.deltaTime, 0, 0);
     }
     void Grow() {
-
+		transform.localScale = GrowScale;
+	}
+    void UnRoot() {
+        transform.localScale = new Vector3(1, 1, 1);
 	}
 }
