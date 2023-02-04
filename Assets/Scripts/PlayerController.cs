@@ -36,9 +36,8 @@ public class PlayerController : MonoBehaviour
         if (Rooted) {
             transform.position = RootedPosition;
 			GetComponent<Collider2D>().isTrigger = true;
-			if (inputActions.Rooted.Grow.IsPressed()) {
-				Grow();
-			}
+			Grow();
+			
 		}
 	}
     void MoveRight() {
