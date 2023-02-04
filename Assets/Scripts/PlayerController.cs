@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 	GameObject Stair;
     public int PlayerSpeed = 5;
     public int JumpHeight = 4;
+	public float StairOffset = 0.5f;
 	private Player inputActions;
     public static bool Rooted = false;
     public Vector3 GrowScale;
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour
 		}
         if (Rooted) {
             transform.position = RootedPosition;
+			GetComponent<Collider2D>().isTrigger = true;
 			if (inputActions.Rooted.Grow.IsPressed()) {
 				Grow();
 			}
@@ -54,8 +56,6 @@ public class PlayerController : MonoBehaviour
 		IsJumping = false;
 	}
     void Grow() {
-		transform.localScale = GrowScale;
-		RootedPosition = transform.position;
 		if (inputActions.PlayerControls.Left.IsPressed()) {
 			GrowStairs(false);
 		} else if (inputActions.PlayerControls.Right.IsPressed()) {
@@ -64,9 +64,9 @@ public class PlayerController : MonoBehaviour
 	}
 	void GrowStairs(bool IsRight) {
 		if (IsRight) {
-			Instantiate(Stair, transform.position, Quaternion.identity);
+			Instantiate(Stair, transform.position+new Vector3(StairOffset, 0,0), Quaternion.identity);
 		} else {
-			GameObject NewStair = Instantiate(Stair, transform.position, Quaternion.identity);
+			GameObject NewStair = Instantiate(Stair, transform.position + new Vector3(-StairOffset, 0, 0), Quaternion.identity);
 			NewStair.transform.localScale = new Vector3(-1,1,1);
 		}
 	}
@@ -82,7 +82,13 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 	void UnRoot() {
+		GetComponent<Collider2D>().isTrigger = false;
 		Rooted = false;
 		transform.localScale = new Vector3(1, 1, 1);
+		GameObject[] Stairs = GameObject.FindGameObjectsWithTag("Stairs");
+		int AmountOfStairs = Stairs.Length;
+		for (int i = 0; i < AmountOfStairs; i++) {
+			Destroy(Stairs[i]);
+		}
 	}
 }
