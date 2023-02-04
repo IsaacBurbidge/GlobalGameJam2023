@@ -20,6 +20,6 @@ public class Bird : MonoBehaviour
 	private void Update() {
 		transform.position += BirdSpeed*Time.deltaTime;
 		transform.rotation = Quaternion.identity;
-		transform.position = new Vector3 (transform.position.x, -3.8f, transform.position.z);
+		transform.position = new Vector3 (transform.position.x, -3.63f, transform.position.z);
 	}
 }

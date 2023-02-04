@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+	[SerializeField]
+	GameObject Stair;
     public int PlayerSpeed = 5;
     public int JumpHeight = 4;
 	private Player inputActions;
@@ -32,7 +34,7 @@ public class PlayerController : MonoBehaviour
 		}
         if (Rooted) {
             transform.position = RootedPosition;
-			if (inputActions.PlayerControls.Grow.IsPressed()) {
+			if (inputActions.Rooted.Grow.IsPressed()) {
 				Grow();
 			}
 		}
@@ -54,6 +56,19 @@ public class PlayerController : MonoBehaviour
     void Grow() {
 		transform.localScale = GrowScale;
 		RootedPosition = transform.position;
+		if (inputActions.PlayerControls.Left.IsPressed()) {
+			GrowStairs(false);
+		} else if (inputActions.PlayerControls.Right.IsPressed()) {
+			GrowStairs(true);
+		}
+	}
+	void GrowStairs(bool IsRight) {
+		if (IsRight) {
+			Instantiate(Stair, transform.position, Quaternion.identity);
+		} else {
+			GameObject NewStair = Instantiate(Stair, transform.position, Quaternion.identity);
+			NewStair.transform.localScale = new Vector3(-1,1,1);
+		}
 	}
 	private void OnTriggerStay2D(Collider2D collision) {
 		if (collision.tag == "CanGrow") {

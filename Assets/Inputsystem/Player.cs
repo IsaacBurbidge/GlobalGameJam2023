@@ -55,15 +55,6 @@ public partial class @Player : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Grow"",
-                    ""type"": ""Button"",
-                    ""id"": ""bdc0d34a-0d79-44e2-82a8-7305ecca693c"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""7f62f32c-46f4-4260-9bd9-17f2f8954d1d"",
@@ -140,17 +131,6 @@ public partial class @Player : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0a398d0d-dd2a-4355-a541-e2ba9053bbf2"",
-                    ""path"": ""<Keyboard>/g"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Grow"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""579cfd3a-efe0-4f2a-8991-283314cf1c1b"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
@@ -172,6 +152,74 @@ public partial class @Player : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Rooted"",
+            ""id"": ""1de20a06-609c-482c-ad3a-5468910ff054"",
+            ""actions"": [
+                {
+                    ""name"": ""Grow"",
+                    ""type"": ""Button"",
+                    ""id"": ""027a8b49-fe5c-4bac-a8c3-6077359f0af1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Left"",
+                    ""type"": ""Button"",
+                    ""id"": ""a8327593-0cfd-4899-b091-78533a55fe06"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Right"",
+                    ""type"": ""Button"",
+                    ""id"": ""9ee80fdc-2f28-461f-8262-3ca741bf83e1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""849477f0-75dc-426a-ac95-f83a70ad648a"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0e8e907b-cb5d-4ec6-a5aa-c3d5f4df8398"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Left"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ed676d93-f0c8-423e-8701-e77db5f4049d"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -181,9 +229,13 @@ public partial class @Player : IInputActionCollection2, IDisposable
         m_PlayerControls_Root = m_PlayerControls.FindAction("Root", throwIfNotFound: true);
         m_PlayerControls_Left = m_PlayerControls.FindAction("Left", throwIfNotFound: true);
         m_PlayerControls_Right = m_PlayerControls.FindAction("Right", throwIfNotFound: true);
-        m_PlayerControls_Grow = m_PlayerControls.FindAction("Grow", throwIfNotFound: true);
         m_PlayerControls_Jump = m_PlayerControls.FindAction("Jump", throwIfNotFound: true);
         m_PlayerControls_UnRoot = m_PlayerControls.FindAction("UnRoot", throwIfNotFound: true);
+        // Rooted
+        m_Rooted = asset.FindActionMap("Rooted", throwIfNotFound: true);
+        m_Rooted_Grow = m_Rooted.FindAction("Grow", throwIfNotFound: true);
+        m_Rooted_Left = m_Rooted.FindAction("Left", throwIfNotFound: true);
+        m_Rooted_Right = m_Rooted.FindAction("Right", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -246,7 +298,6 @@ public partial class @Player : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControls_Root;
     private readonly InputAction m_PlayerControls_Left;
     private readonly InputAction m_PlayerControls_Right;
-    private readonly InputAction m_PlayerControls_Grow;
     private readonly InputAction m_PlayerControls_Jump;
     private readonly InputAction m_PlayerControls_UnRoot;
     public struct PlayerControlsActions
@@ -256,7 +307,6 @@ public partial class @Player : IInputActionCollection2, IDisposable
         public InputAction @Root => m_Wrapper.m_PlayerControls_Root;
         public InputAction @Left => m_Wrapper.m_PlayerControls_Left;
         public InputAction @Right => m_Wrapper.m_PlayerControls_Right;
-        public InputAction @Grow => m_Wrapper.m_PlayerControls_Grow;
         public InputAction @Jump => m_Wrapper.m_PlayerControls_Jump;
         public InputAction @UnRoot => m_Wrapper.m_PlayerControls_UnRoot;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
@@ -277,9 +327,6 @@ public partial class @Player : IInputActionCollection2, IDisposable
                 @Right.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRight;
                 @Right.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRight;
                 @Right.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnRight;
-                @Grow.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnGrow;
-                @Grow.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnGrow;
-                @Grow.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnGrow;
                 @Jump.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnJump;
@@ -299,9 +346,6 @@ public partial class @Player : IInputActionCollection2, IDisposable
                 @Right.started += instance.OnRight;
                 @Right.performed += instance.OnRight;
                 @Right.canceled += instance.OnRight;
-                @Grow.started += instance.OnGrow;
-                @Grow.performed += instance.OnGrow;
-                @Grow.canceled += instance.OnGrow;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
@@ -312,13 +356,67 @@ public partial class @Player : IInputActionCollection2, IDisposable
         }
     }
     public PlayerControlsActions @PlayerControls => new PlayerControlsActions(this);
+
+    // Rooted
+    private readonly InputActionMap m_Rooted;
+    private IRootedActions m_RootedActionsCallbackInterface;
+    private readonly InputAction m_Rooted_Grow;
+    private readonly InputAction m_Rooted_Left;
+    private readonly InputAction m_Rooted_Right;
+    public struct RootedActions
+    {
+        private @Player m_Wrapper;
+        public RootedActions(@Player wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Grow => m_Wrapper.m_Rooted_Grow;
+        public InputAction @Left => m_Wrapper.m_Rooted_Left;
+        public InputAction @Right => m_Wrapper.m_Rooted_Right;
+        public InputActionMap Get() { return m_Wrapper.m_Rooted; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(RootedActions set) { return set.Get(); }
+        public void SetCallbacks(IRootedActions instance)
+        {
+            if (m_Wrapper.m_RootedActionsCallbackInterface != null)
+            {
+                @Grow.started -= m_Wrapper.m_RootedActionsCallbackInterface.OnGrow;
+                @Grow.performed -= m_Wrapper.m_RootedActionsCallbackInterface.OnGrow;
+                @Grow.canceled -= m_Wrapper.m_RootedActionsCallbackInterface.OnGrow;
+                @Left.started -= m_Wrapper.m_RootedActionsCallbackInterface.OnLeft;
+                @Left.performed -= m_Wrapper.m_RootedActionsCallbackInterface.OnLeft;
+                @Left.canceled -= m_Wrapper.m_RootedActionsCallbackInterface.OnLeft;
+                @Right.started -= m_Wrapper.m_RootedActionsCallbackInterface.OnRight;
+                @Right.performed -= m_Wrapper.m_RootedActionsCallbackInterface.OnRight;
+                @Right.canceled -= m_Wrapper.m_RootedActionsCallbackInterface.OnRight;
+            }
+            m_Wrapper.m_RootedActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Grow.started += instance.OnGrow;
+                @Grow.performed += instance.OnGrow;
+                @Grow.canceled += instance.OnGrow;
+                @Left.started += instance.OnLeft;
+                @Left.performed += instance.OnLeft;
+                @Left.canceled += instance.OnLeft;
+                @Right.started += instance.OnRight;
+                @Right.performed += instance.OnRight;
+                @Right.canceled += instance.OnRight;
+            }
+        }
+    }
+    public RootedActions @Rooted => new RootedActions(this);
     public interface IPlayerControlsActions
     {
         void OnRoot(InputAction.CallbackContext context);
         void OnLeft(InputAction.CallbackContext context);
         void OnRight(InputAction.CallbackContext context);
-        void OnGrow(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnUnRoot(InputAction.CallbackContext context);
+    }
+    public interface IRootedActions
+    {
+        void OnGrow(InputAction.CallbackContext context);
+        void OnLeft(InputAction.CallbackContext context);
+        void OnRight(InputAction.CallbackContext context);
     }
 }
