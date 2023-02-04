@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
         } 
         if (!IsJumping) {
 			if (inputActions.PlayerControls.Jump.IsPressed()) {
-				Debug.Log("hi");
                 IsJumping = true;
 				Jump();
 			}
@@ -34,7 +33,6 @@ public class PlayerController : MonoBehaviour
         if (Rooted) {
             transform.position = RootedPosition;
 			if (inputActions.PlayerControls.Grow.IsPressed()) {
-				Debug.Log("hello");
 				Grow();
 			}
 		}
