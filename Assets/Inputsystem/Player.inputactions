@@ -42,18 +42,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "UnRoot",
+                    "name": "Jump",
                     "type": "Button",
-                    "id": "da676711-17db-4f1d-ac9c-13ea2c1f6183",
+                    "id": "7f62f32c-46f4-4260-9bd9-17f2f8954d1d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Jump",
+                    "name": "UnRoot",
                     "type": "Button",
-                    "id": "7f62f32c-46f4-4260-9bd9-17f2f8954d1d",
+                    "id": "10572c45-920a-41e6-a685-1dc333b2c885",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -129,23 +129,23 @@
                 },
                 {
                     "name": "",
-                    "id": "bf0242c7-63c9-4254-8246-830dff42c2ae",
-                    "path": "<Keyboard>/u",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "UnRoot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "579cfd3a-efe0-4f2a-8991-283314cf1c1b",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "63696c84-2063-44a6-bb34-f9787b77fe60",
+                    "path": "<Keyboard>/u",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UnRoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

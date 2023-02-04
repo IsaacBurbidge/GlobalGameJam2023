@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1420745292988783578}
   - component: {fileID: 1420745292988783577}
   - component: {fileID: 1420745292988783576}
-  - component: {fileID: -7520749707307431923}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -149,8 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerSpeed: 5
-  JumpHeight: 4
-  GrowScale: {x: 1, y: 2, z: 1}
+  JumpHeight: 2
+  GrowScale: {x: 1, y: 1.5, z: 1}
 --- !u!114 &1420745292988783576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,15 +180,3 @@ MonoBehaviour:
   m_DefaultActionMap: PlayerControls
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &-7520749707307431923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1420745292988783574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e43122b37f1bdf428c8e1b7e8531386, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

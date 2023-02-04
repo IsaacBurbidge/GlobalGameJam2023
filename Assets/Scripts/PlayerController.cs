@@ -8,34 +8,35 @@ public class PlayerController : MonoBehaviour
     public int PlayerSpeed = 5;
     public int JumpHeight = 4;
 	private Player inputActions;
-    public static bool CanMove = true;
+    public static bool Rooted = false;
     public Vector3 GrowScale;
+    bool IsJumping = false;
+    public Vector3 RootedPosition;
     private void Start() {
         GetComponent<PlayerController>().inputActions = new Player();
         GetComponent<PlayerController>().inputActions.Enable();
-        Growing.SetInput(this.transform.gameObject,inputActions);
     }
     void Update(){
-		switch (CanMove) {
-            case true: {
-                if (inputActions.PlayerControls.Right.IsPressed()) {
-                    MoveRight();
-                } else if (inputActions.PlayerControls.Left.IsPressed()) {
-                    MoveLeft();
-                } 
+		transform.rotation = Quaternion.identity;
 
-				break;
-            }
-            case false: {
-                if (inputActions.PlayerControls.Grow.IsPressed()) {
-                    Grow();
-                }
-                break;
-            }
-        }
-		if (inputActions.PlayerControls.Jump.IsPressed()) {
-            Debug.Log("hi");
-			Jump();
+        if (inputActions.PlayerControls.Right.IsPressed()) {
+            MoveRight();
+        } else if (inputActions.PlayerControls.Left.IsPressed()) {
+            MoveLeft();
+        } 
+        if (!IsJumping) {
+			if (inputActions.PlayerControls.Jump.IsPressed()) {
+				Debug.Log("hi");
+                IsJumping = true;
+				Jump();
+			}
+		}
+        if (Rooted) {
+            transform.position = RootedPosition;
+			if (inputActions.PlayerControls.Grow.IsPressed()) {
+				Debug.Log("hello");
+				Grow();
+			}
 		}
 	}
     void MoveRight() {
@@ -46,11 +47,29 @@ public class PlayerController : MonoBehaviour
     }
     void Jump() {
 		transform.position += new Vector3(0, JumpHeight, 0);
+		StartCoroutine(WaitToJump());
+	}
+    IEnumerator WaitToJump() {
+        yield return new WaitForSeconds(1);
+		IsJumping = false;
 	}
     void Grow() {
 		transform.localScale = GrowScale;
+		RootedPosition = transform.position;
 	}
-    void UnRoot() {
-        transform.localScale = new Vector3(1, 1, 1);
+	private void OnTriggerStay2D(Collider2D collision) {
+		if (collision.tag == "CanGrow") {
+			if (inputActions.PlayerControls.Root.IsPressed()) {
+                RootedPosition = transform.position;
+				Rooted = true;
+			}
+			else if (inputActions.PlayerControls.UnRoot.IsPressed()) {
+				UnRoot();
+			}
+		}
+	}
+	void UnRoot() {
+		Rooted = false;
+		transform.localScale = new Vector3(1, 1, 1);
 	}
 }
