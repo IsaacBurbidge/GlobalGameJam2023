@@ -71,6 +71,15 @@ public partial class @Player : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""7f62f32c-46f4-4260-9bd9-17f2f8954d1d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -150,6 +159,17 @@ public partial class @Player : IInputActionCollection2, IDisposable
                     ""action"": ""UnRoot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""579cfd3a-efe0-4f2a-8991-283314cf1c1b"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -163,6 +183,7 @@ public partial class @Player : IInputActionCollection2, IDisposable
         m_PlayerControls_Right = m_PlayerControls.FindAction("Right", throwIfNotFound: true);
         m_PlayerControls_Grow = m_PlayerControls.FindAction("Grow", throwIfNotFound: true);
         m_PlayerControls_UnRoot = m_PlayerControls.FindAction("UnRoot", throwIfNotFound: true);
+        m_PlayerControls_Jump = m_PlayerControls.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -227,6 +248,7 @@ public partial class @Player : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControls_Right;
     private readonly InputAction m_PlayerControls_Grow;
     private readonly InputAction m_PlayerControls_UnRoot;
+    private readonly InputAction m_PlayerControls_Jump;
     public struct PlayerControlsActions
     {
         private @Player m_Wrapper;
@@ -236,6 +258,7 @@ public partial class @Player : IInputActionCollection2, IDisposable
         public InputAction @Right => m_Wrapper.m_PlayerControls_Right;
         public InputAction @Grow => m_Wrapper.m_PlayerControls_Grow;
         public InputAction @UnRoot => m_Wrapper.m_PlayerControls_UnRoot;
+        public InputAction @Jump => m_Wrapper.m_PlayerControls_Jump;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -260,6 +283,9 @@ public partial class @Player : IInputActionCollection2, IDisposable
                 @UnRoot.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnUnRoot;
                 @UnRoot.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnUnRoot;
                 @UnRoot.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnUnRoot;
+                @Jump.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnJump;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -279,6 +305,9 @@ public partial class @Player : IInputActionCollection2, IDisposable
                 @UnRoot.started += instance.OnUnRoot;
                 @UnRoot.performed += instance.OnUnRoot;
                 @UnRoot.canceled += instance.OnUnRoot;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
@@ -290,5 +319,6 @@ public partial class @Player : IInputActionCollection2, IDisposable
         void OnRight(InputAction.CallbackContext context);
         void OnGrow(InputAction.CallbackContext context);
         void OnUnRoot(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }

@@ -149,7 +149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerSpeed: 5
-  GrowScale: {x: 3, y: 3, z: 3}
+  JumpHeight: 4
+  GrowScale: {x: 1, y: 2, z: 1}
 --- !u!114 &1420745292988783576
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     public int PlayerSpeed = 5;
-    private Player inputActions;
+    public int JumpHeight = 4;
+	private Player inputActions;
     public static bool CanMove = true;
     public Vector3 GrowScale;
     private void Start() {
@@ -21,8 +22,9 @@ public class PlayerController : MonoBehaviour
                     MoveRight();
                 } else if (inputActions.PlayerControls.Left.IsPressed()) {
                     MoveLeft();
-                }
-                break;
+                } 
+
+				break;
             }
             case false: {
                 if (inputActions.PlayerControls.Grow.IsPressed()) {
@@ -31,14 +33,20 @@ public class PlayerController : MonoBehaviour
                 break;
             }
         }
-    }
-
+		if (inputActions.PlayerControls.Jump.IsPressed()) {
+            Debug.Log("hi");
+			Jump();
+		}
+	}
     void MoveRight() {
         transform.position += new Vector3(PlayerSpeed* Time.deltaTime, 0,0);
 	}
     void MoveLeft() {
         transform.position += new Vector3(-PlayerSpeed*Time.deltaTime, 0, 0);
     }
+    void Jump() {
+		transform.position += new Vector3(0, JumpHeight, 0);
+	}
     void Grow() {
 		transform.localScale = GrowScale;
 	}
