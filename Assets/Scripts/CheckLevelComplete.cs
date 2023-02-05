@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class CheckWin : MonoBehaviour
+public class CheckLevelComplete : MonoBehaviour
 {
 	public static bool HasWon = false;
- 
-	private void Update() {
-		if(HasWon == true) {
-			SceneManager.LoadScene(2);
+	void Update(){
+		if (HasWon == true) {
+			SceneManager.LoadScene(4);
 			HasWon = false;
-			CheckLevelComplete.HasWon = false;
+			CheckWin.HasWon = false;
 		}
 	}
 }

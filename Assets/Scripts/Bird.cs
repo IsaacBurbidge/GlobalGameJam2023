@@ -25,6 +25,7 @@ public class Bird : MonoBehaviour
 	private void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.tag == "Nest") {
 			CheckWin.HasWon = true;
+			CheckLevelComplete.HasWon = true;
 		}
 	}
 	private void OnCollisionExit2D(Collision2D collision) {

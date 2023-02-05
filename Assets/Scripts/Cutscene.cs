@@ -16,7 +16,7 @@ public class Cutscene : MonoBehaviour
 	public void OnIndexChanged() {
 		if (Index == TextList.Count) {
 			CutsceneTextDisplay.SetText("", this.gameObject);
-			SceneManager.LoadScene(3);
+			SceneManager.LoadScene(4);
 		} else {
 			CutsceneTextDisplay.SetText(TextList[Index], this.gameObject);
 			Index++;
